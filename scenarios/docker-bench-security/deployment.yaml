@@ -124,15 +124,18 @@ spec:
         - name: usr-bin-runc-vol
           hostPath:
               path: /usr/bin/runc
+        # No hostPathType constraint on these three: they're Unix sockets, not
+        # directories. `DirectoryOrCreate` fails validation whenever the path
+        # already exists as a socket (e.g. containerd.sock on a kind node),
+        # and none of the three sockets are guaranteed to exist on every
+        # runtime -- leaving type unset skips the pre-mount check entirely,
+        # so whichever socket is actually present just mounts.
         - name: docker-sock-volume
           hostPath:
             path: /var/run/docker.sock
-            type: DirectoryOrCreate
         - name: docker-sock-fallback
           hostPath:
             path: /run/docker.sock
-            type: DirectoryOrCreate
         - name: containerd-sock-volume
           hostPath:
             path: /run/containerd/containerd.sock
-            type: DirectoryOrCreate
