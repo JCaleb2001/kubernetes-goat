@@ -29,4 +29,6 @@ kind create cluster --config kind-cluster-setup.yaml --name kubernetes-goat-clus
 cd ../..
 
 # Setup GOAT exposing host Docker socket:
-sh setup-kubernetes-goat.sh
+# NOTE: use bash, not sh -- on Debian/Ubuntu (incl. WSL2) /bin/sh is dash,
+# which doesn't support the [[ ]] / case-shift-2 syntax used in this script.
+bash setup-kubernetes-goat.sh
