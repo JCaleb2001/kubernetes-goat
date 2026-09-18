@@ -70,7 +70,7 @@ kubectl $KUBECTL_INSECURE apply -f scenarios/insecure-rbac/setup.yaml
 
 # deploying helm chart to verify the setup
 echo "deploying helm chart metadata-db scenario"
-helm $HELM_INSECURE install metadata-db scenarios/metadata-db/
+helm $HELM_INSECURE upgrade --install metadata-db scenarios/metadata-db/
 
 # setup the scenarios/configurations
 echo 'deploying the vulnerable scenarios manifests'
